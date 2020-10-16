@@ -8151,39 +8151,46 @@ cps()
 {
 80104150:	55                   	push   %ebp
 80104151:	89 e5                	mov    %esp,%ebp
-80104153:	53                   	push   %ebx
-80104154:	83 ec 10             	sub    $0x10,%esp
+80104153:	57                   	push   %edi
+80104154:	56                   	push   %esi
+80104155:	53                   	push   %ebx
+80104156:	83 ec 18             	sub    $0x18,%esp
   asm volatile("sti");
-80104157:	fb                   	sti    
- struct proc *p;
-
+80104159:	fb                   	sti    
+ int run_count = 0; 
+ int sleep_count = 0; 
  // Enable interrupts on this processor.
  sti();
  // Loop over process table looking for process with pid.
  acquire(&ptable.lock);
-80104158:	68 20 2d 11 80       	push   $0x80112d20
+8010415a:	68 20 2d 11 80       	push   $0x80112d20
+ int sleep_count = 0; 
+8010415f:	31 f6                	xor    %esi,%esi
+ int run_count = 0; 
+80104161:	31 ff                	xor    %edi,%edi
  cprintf("name \t pid \t state \n");
  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-8010415d:	bb 54 2d 11 80       	mov    $0x80112d54,%ebx
+80104163:	bb 54 2d 11 80       	mov    $0x80112d54,%ebx
  acquire(&ptable.lock);
-80104162:	e8 19 03 00 00       	call   80104480 <acquire>
+80104168:	e8 13 03 00 00       	call   80104480 <acquire>
  cprintf("name \t pid \t state \n");
-80104167:	c7 04 24 b8 75 10 80 	movl   $0x801075b8,(%esp)
-8010416e:	e8 2d c5 ff ff       	call   801006a0 <cprintf>
-80104173:	83 c4 10             	add    $0x10,%esp
-80104176:	eb 18                	jmp    80104190 <cps+0x40>
-80104178:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
-8010417f:	90                   	nop
- if ( p->state == SLEEPING )
+8010416d:	c7 04 24 b8 75 10 80 	movl   $0x801075b8,(%esp)
+80104174:	e8 27 c5 ff ff       	call   801006a0 <cprintf>
+80104179:	83 c4 10             	add    $0x10,%esp
+8010417c:	eb 12                	jmp    80104190 <cps+0x40>
+8010417e:	66 90                	xchg   %ax,%ax
+ if ( p->state == SLEEPING ){
  cprintf("%s \t %d \t SLEEPING \n ", p->name, p->pid );
- else if ( p->state == RUNNING )
+ sleep_count++; 
+ }
+ else if ( p->state == RUNNING ){
 80104180:	83 f8 04             	cmp    $0x4,%eax
 80104183:	74 53                	je     801041d8 <cps+0x88>
  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
 80104185:	83 c3 7c             	add    $0x7c,%ebx
 80104188:	81 fb 54 4c 11 80    	cmp    $0x80114c54,%ebx
-8010418e:	74 2a                	je     801041ba <cps+0x6a>
- if ( p->state == SLEEPING )
+8010418e:	74 2d                	je     801041bd <cps+0x6d>
+ if ( p->state == SLEEPING ){
 80104190:	8b 43 0c             	mov    0xc(%ebx),%eax
 80104193:	83 f8 02             	cmp    $0x2,%eax
 80104196:	75 e8                	jne    80104180 <cps+0x30>
@@ -8195,38 +8202,53 @@ cps()
 801041a1:	83 c3 7c             	add    $0x7c,%ebx
  cprintf("%s \t %d \t SLEEPING \n ", p->name, p->pid );
 801041a4:	50                   	push   %eax
-801041a5:	68 cd 75 10 80       	push   $0x801075cd
-801041aa:	e8 f1 c4 ff ff       	call   801006a0 <cprintf>
-801041af:	83 c4 10             	add    $0x10,%esp
+ sleep_count++; 
+801041a5:	83 c6 01             	add    $0x1,%esi
+ cprintf("%s \t %d \t SLEEPING \n ", p->name, p->pid );
+801041a8:	68 cd 75 10 80       	push   $0x801075cd
+801041ad:	e8 ee c4 ff ff       	call   801006a0 <cprintf>
+ sleep_count++; 
+801041b2:	83 c4 10             	add    $0x10,%esp
  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-801041b2:	81 fb 54 4c 11 80    	cmp    $0x80114c54,%ebx
-801041b8:	75 d6                	jne    80104190 <cps+0x40>
+801041b5:	81 fb 54 4c 11 80    	cmp    $0x80114c54,%ebx
+801041bb:	75 d3                	jne    80104190 <cps+0x40>
  cprintf("%s \t %d \t RUNNING \n ", p->name, p->pid );
+ run_count++; 
  }
-
+ }
+ 
  release(&ptable.lock);
-801041ba:	83 ec 0c             	sub    $0xc,%esp
-801041bd:	68 20 2d 11 80       	push   $0x80112d20
-801041c2:	e8 d9 03 00 00       	call   801045a0 <release>
-
- return 22;
+801041bd:	83 ec 0c             	sub    $0xc,%esp
+801041c0:	68 20 2d 11 80       	push   $0x80112d20
+801041c5:	e8 d6 03 00 00       	call   801045a0 <release>
+ 
+ return (sleep_count+run_count);
 }
-801041c7:	8b 5d fc             	mov    -0x4(%ebp),%ebx
-801041ca:	b8 16 00 00 00       	mov    $0x16,%eax
-801041cf:	c9                   	leave  
-801041d0:	c3                   	ret    
-801041d1:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
+801041ca:	8d 65 f4             	lea    -0xc(%ebp),%esp
+ return (sleep_count+run_count);
+801041cd:	8d 04 37             	lea    (%edi,%esi,1),%eax
+}
+801041d0:	5b                   	pop    %ebx
+801041d1:	5e                   	pop    %esi
+801041d2:	5f                   	pop    %edi
+801041d3:	5d                   	pop    %ebp
+801041d4:	c3                   	ret    
+801041d5:	8d 76 00             	lea    0x0(%esi),%esi
  cprintf("%s \t %d \t RUNNING \n ", p->name, p->pid );
 801041d8:	83 ec 04             	sub    $0x4,%esp
 801041db:	8d 43 6c             	lea    0x6c(%ebx),%eax
 801041de:	ff 73 10             	pushl  0x10(%ebx)
-801041e1:	50                   	push   %eax
-801041e2:	68 e3 75 10 80       	push   $0x801075e3
-801041e7:	e8 b4 c4 ff ff       	call   801006a0 <cprintf>
-801041ec:	83 c4 10             	add    $0x10,%esp
-801041ef:	eb 94                	jmp    80104185 <cps+0x35>
-801041f1:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
-801041f8:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
+ run_count++; 
+801041e1:	83 c7 01             	add    $0x1,%edi
+ cprintf("%s \t %d \t RUNNING \n ", p->name, p->pid );
+801041e4:	50                   	push   %eax
+801041e5:	68 e3 75 10 80       	push   $0x801075e3
+801041ea:	e8 b1 c4 ff ff       	call   801006a0 <cprintf>
+ run_count++; 
+801041ef:	83 c4 10             	add    $0x10,%esp
+801041f2:	eb 91                	jmp    80104185 <cps+0x35>
+801041f4:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
+801041fb:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
 801041ff:	90                   	nop
 
 80104200 <nps>:

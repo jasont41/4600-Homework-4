@@ -1,0 +1,271 @@
+Script started on 2020-10-16 13:23:25-07:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+]0;006915071@csusb.edu@jb359-12:~/xv6[006915071@csusb.edu@jb359-12 xv6]$ make qemu-nox
+dd if=/dev/zero of=xv6.img count=10000
+10000+0 records in
+10000+0 records out
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.223748 s, 22.9 MB/s
+dd if=bootblock of=xv6.img conv=notrunc
+1+0 records in
+1+0 records out
+512 bytes copied, 0.00336447 s, 152 kB/s
+dd if=kernel of=xv6.img seek=1 conv=notrunc
+418+1 records in
+418+1 records out
+214388 bytes (214 kB, 209 KiB) copied, 0.0104355 s, 20.5 MB/s
+which: no qemu in (/opt/anaconda3/bin:/opt/Xilinx/SDK/2018.2/bin:/opt/Xilinx/SDK/2018.2/gnu/microblaze/lin/bin:/opt/Xilinx/SDK/2018.2/gnu/arm/lin/bin:/opt/Xilinx/SDK/2018.2/gnu/microblaze/linux_toolchain/lin64_le/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch64/lin/aarch64-linux/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch64/lin/aarch64-none/bin:/opt/Xilinx/SDK/2018.2/gnu/armr5/lin/gcc-arm-none-eabi/bin:/opt/Xilinx/SDK/2018.2/tps/lnx64/cmake-3.3.2/bin:/opt/Xilinx/DocNav:/opt/Xilinx/Vivado/2018.2/bin:/usr/lib64/openmpi/bin:/opt/UCSF/Chimera64-1.12/bin:/usr/local/MATLAB/R2018a/bin:/share/bin:/usr/local/racket/bin:/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64:/opt/Xilinx/14.7/ISE_DS/common/bin/lin64:/opt/Xilinx/Vivado/2017.2/bin:/opt/Xilinx/Vivado_HLS/2017.2/bin:/opt/android-studio/bin:/opt/android-sdk-linux/tools:/opt/android-sdk-linux/platform-tools:/usr/java/latest/bin:/opt/anaconda3/bin:/opt/Xilinx/SDK/2018.2/bin:/opt/Xilinx/SDK/2018.2/gnu/microblaze/lin/bin:/opt/Xilinx/SDK/2018.2/gnu/arm/lin/bin:/opt/Xilinx/SDK/2018.2/gnu/microblaze/linux_toolchain/lin64_le/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch64/lin/aarch64-linux/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch64/lin/aarch64-none/bin:/opt/Xilinx/SDK/2018.2/gnu/armr5/lin/gcc-arm-none-eabi/bin:/opt/Xilinx/SDK/2018.2/tps/lnx64/cmake-3.3.2/bin:/opt/Xilinx/DocNav:/opt/Xilinx/Vivado/2018.2/bin:/usr/lib64/openmpi/bin:/opt/UCSF/Chimera64-1.12/bin:/usr/local/MATLAB/R2018a/bin:/share/bin:/usr/local/racket/bin:/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64:/opt/Xilinx/14.7/ISE_DS/common/bin/lin64:/opt/Xilinx/Vivado/2017.2/bin:/opt/Xilinx/Vivado_HLS/2017.2/bin:/opt/android-studio/bin:/opt/android-sdk-linux/tools:/opt/android-sdk-linux/platform-tools:/usr/java/latest/bin:/opt/anaconda3/bin:/opt/Xilinx/SDK/2018.2/bin:/opt/Xilinx/SDK/2018.2/gnu/microblaze/lin/bin:/opt/Xilinx/SDK/2018.2/gnu/arm/lin/bin:/opt/Xilinx/SDK/2018.2/gnu/microblaze/linux_toolchain/lin64_le/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch64/lin/aarch64-linux/bin:/opt/Xilinx/SDK/2018.2/gnu/aarch64/lin/aarch64-none/bin:/opt/Xilinx/SDK/2018.2/gnu/armr5/lin/gcc-arm-none-eabi/bin:/opt/Xilinx/SDK/2018.2/tps/lnx64/cmake-3.3.2/bin:/opt/Xilinx/DocNav:/opt/Xilinx/Vivado/2018.2/bin:/usr/lib64/openmpi/bin:/opt/UCSF/Chimera64-1.12/bin:/usr/local/MATLAB/R2018a/bin:/share/bin:/usr/local/racket/bin:/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64:/opt/Xilinx/14.7/ISE_DS/common/bin/lin64:/opt/Xilinx/Vivado/2017.2/bin:/opt/Xilinx/Vivado_HLS/2017.2/bin:/opt/android-studio/bin:/opt/android-sdk-linux/tools:/opt/android-sdk-linux/platform-tools:/usr/java/latest/bin:/usr/lib64/qt-3.3/bin:/usr/share/Modules/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/csusb.edu/006915071/.local/bin:/home/csusb.edu/006915071/bin)
+qemu-system-i386 -nographic -drive file=fs.img,index=1,media=disk,format=raw -drive file=xv6.img,index=0,media=disk,format=raw -smp 2 -m 512 
+c[?7l[2J[0mSeaBIOS (version 1.12.0-2.fc30)
+
+
+iPXE (http://ipxe.org) 00:03.0 C980 PCI2.10 PnP PMM+1FF91280+1FED1280 C980
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from Hard Disk..xv6...
+cpu1: starting 1
+cpu0: starting 0
+sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58
+init: starting sh
+$ ls
+.              1 1 512
+..             1 1 512
+README         2 2 2290
+cat            2 3 16184
+echo           2 4 15024
+forktest       2 5 9344
+grep           2 6 18376
+init           2 7 15628
+kill           2 8 15052
+ln             2 9 14924
+ls             2 10 17544
+mkdir          2 11 15168
+rm             2 12 15144
+sh             2 13 27664
+stressfs       2 14 16060
+usertests      2 15 66996
+wc             2 16 16904
+cp             2 17 15584
+ps             2 18 14748
+touch          2 19 15328
+zombie         2 20 14740
+console        3 21 0
+myfile         2 22 2290
+myfile1        2 23 0
+myfile2        2 24 0
+myfile3        2 25 0
+$ touchmy   myfilw e4 myfile 5  5 myfile6
+$ ls
+.              1 1 512
+..             1 1 512
+README         2 2 2290
+cat            2 3 16184
+echo           2 4 15024
+forktest       2 5 9344
+grep           2 6 18376
+init           2 7 15628
+kill           2 8 15052
+ln             2 9 14924
+ls             2 10 17544
+mkdir          2 11 15168
+rm             2 12 15144
+sh             2 13 27664
+stressfs       2 14 16060
+usertests      2 15 66996
+wc             2 16 16904
+cp             2 17 15584
+ps             2 18 14748
+touch          2 19 15328
+zombie         2 20 14740
+console        3 21 0
+myfile         2 22 2290
+myfile1        2 23 0
+myfile2        2 24 0
+myfile3        2 25 0
+myfile4        2 26 0
+myfile5        2 27 0
+myfile6        2 28 0
+$ ps
+name 	 pid 	 state 
+init 	 1 	 SLEEPING 
+ sh 	 2 	 SLEEPING 
+ ps 	 6 	 RUNNING 
+ $ QEMU 3.1.1 monitor - type 'help' for more information
+(qemu) h[K[Dhe[K[D[Dhel[K[D[D[Dhelp[K
+acl_add aclname match allow|deny [index] -- add a match rule to the access control list
+acl_policy aclname allow|deny -- set default access control list policy
+acl_remove aclname match -- remove a match rule from the access control list
+acl_reset aclname -- reset the access control list
+acl_show aclname -- list rules in the access control list
+balloon target -- request VM to change its memory allocation (in MB)
+block_job_cancel [-f] device -- stop an active background block operation (use -f
+			 if you want to abort the operation immediately
+			 instead of keep running until data is in sync)
+block_job_complete device -- stop an active background block operation
+block_job_pause device -- pause an active background block operation
+block_job_resume device -- resume a paused background block operation
+block_job_set_speed device speed -- set maximum speed for a background block operation
+block_passwd block_passwd device password -- set the password of encrypted block devices
+block_resize device size -- resize a block image
+block_set_io_throttle device bps bps_rd bps_wr iops iops_rd iops_wr -- change I/O throttle limits for a block drive
+block_stream device [speed [base]] -- copy data from a backing file into a block device
+boot_set bootdevice -- define new values for the boot device list
+change device filename [format [read-only-mode]] -- change a removable medium, optional format
+chardev-add args -- add chardev
+chardev-change id args -- change chardev
+chardev-remove id -- remove chardev
+chardev-send-break id -- send a break on chardev
+client_migrate_info protocol hostname port tls-port cert-subject -- set migration information for remote display
+closefd closefd name -- close a file descriptor previously passed via SCM rights
+commit device|all -- commit changes to the disk images (if -snapshot is used) or backing files
+cpu index -- set the default CPU
+cpu-add id -- add cpu
+c|cont  -- resume emulation
+delvm tag|id -- delete a VM snapshot from its tag or id
+device_add driver[,prop=value][,...] -- add device, like -device on the command line
+device_del device -- remove device
+drive_add [-n] [[<domain>:]<bus>:]<slot>
+[file=file][,if=type][,bus=n]
+[,unit=m][,media=d][,index=i]
+[,snapshot=on|off][,cache=on|off]
+[,readonly=on|off][,copy-on-read=on|off] -- add drive to PCI storage controller
+drive_backup [-n] [-f] [-c] device target [format] -- initiates a point-in-time
+			copy for a device. The device's contents are
+			copied to the new image file, excluding data that
+			is written after the command is started.
+			The -n flag requests QEMU to reuse the image found
+			in new-image-file, instead of recreating it from scratch.
+			The -f flag requests QEMU to copy the whole disk,
+			so that the result does not need a backing file.
+			The -c flag requests QEMU to compress backup data
+			(if the target format supports it).
+			
+drive_del device -- remove host block device
+drive_mirror [-n] [-f] device target [format] -- initiates live storage
+			migration for a device. The device's contents are
+			copied to the new image file, including data that
+			is written after the command is started.
+			The -n flag requests QEMU to reuse the image found
+			in new-image-file, instead of recreating it from scratch.
+			The -f flag requests QEMU to copy the whole disk,
+			so that the result does not need a backing file.
+			
+dump-guest-memory [-p] [-d] [-z|-l|-s|-w] filename [begin length] -- dump guest memory into file 'filename'.
+			-p: do paging to get guest's memory mapping.
+			-d: return immediately (do not wait for completion).
+			-z: dump in kdump-compressed format, with zlib compression.
+			-l: dump in kdump-compressed format, with lzo compression.
+			-s: dump in kdump-compressed format, with snappy compression.
+			-w: dump in Windows crashdump format (can be used instead of ELF-dump converting),
+			    for Windows x64 guests with vmcoreinfo driver only.
+			begin: the starting physical address.
+			length: the memory size, in bytes.
+eject [-f] device -- eject a removable medium (use -f to force it)
+exit_preconfig  -- exit the preconfig state
+expire_password protocol time -- set spice/vnc password expire-time
+gdbserver [device] -- start gdbserver on given device (default 'tcp::1234'), stop with 'none'
+getfd getfd name -- receive a file descriptor via SCM rights and assign it a name
+gpa2hpa addr -- print the host physical address corresponding to a guest physical address
+gpa2hva addr -- print the host virtual address corresponding to a guest physical address
+help|? [cmd] -- show the help
+hostfwd_add [hub_id name]|[netdev_id] [tcp|udp]:[hostaddr]:hostport-[guestaddr]:guestport -- redirect TCP or UDP connections from host to guest (requires -net user)
+hostfwd_remove [hub_id name]|[netdev_id] [tcp|udp]:[hostaddr]:hostport -- remove host-to-guest TCP or UDP redirection
+i /fmt addr -- I/O port read
+info [subcommand] -- show various information about the system state
+loadvm tag|id -- restore a VM snapshot from its tag or id
+log item1[,...] -- activate logging of the specified items
+logfile filename -- output logs to 'filename'
+mce [-b] cpu bank status mcgstatus addr misc -- inject a MCE on the given CPU [and broadcast to other CPUs with -b option]
+memsave addr size file -- save to disk virtual memory dump starting at 'addr' of size 'size'
+migrate [-d] [-b] [-i] [-r] uri -- migrate to URI (using -d to not wait for completion)
+			 -b for migration without shared storage with full copy of disk
+			 -i for migration without shared storage with incremental copy of disk (base image shared between src and destination)
+			 -r to resume a paused migration
+migrate_cancel  -- cancel the current VM migration
+migrate_continue state -- Continue migration from the given paused state
+migrate_incoming uri -- Continue an incoming migration from an -incoming defer
+migrate_pause  -- Pause an ongoing migration (postcopy-only)
+migrate_recover uri -- Continue a paused incoming postcopy migration
+migrate_set_cache_size value -- set cache size (in bytes) for XBZRLE migrations,the cache size will be rounded down to the nearest power of 2.
+The cache size affects the number of cache misses.In case of a high cache miss ratio you need to increase the cache size
+migrate_set_capability capability state -- Enable/Disable the usage of a capability for migration
+migrate_set_downtime value -- set maximum tolerated downtime (in seconds) for migrations
+migrate_set_parameter parameter value -- Set the parameter for migration
+migrate_set_speed value -- set maximum speed (in bytes) for migrations. Defaults to MB if no size suffix is specified, ie. B/K/M/G/T
+migrate_start_postcopy  -- Followup to a migration command to switch the migration to postcopy mode. The postcopy-ram capability must be set on both source and destination before the original migration command .
+mouse_button state -- change mouse button state (1=L, 2=M, 4=R)
+mouse_move dx dy [dz] -- send mouse move events
+mouse_set index -- set which mouse device receives events
+nbd_server_add nbd_server_add [-w] device [name] -- export a block device via NBD
+nbd_server_remove nbd_server_remove [-f] name -- remove an export previously exposed via NBD
+nbd_server_start nbd_server_start [-a] [-w] host:port -- serve block devices on the given host and port
+nbd_server_stop nbd_server_stop -- stop serving block devices using the NBD protocol
+netdev_add [user|tap|socket|vde|bridge|hubport|netmap|vhost-user],id=str[,prop=value][,...] -- add host network device
+netdev_del id -- remove host network device
+nmi  -- inject an NMI
+o /fmt addr value -- I/O port write
+object_add [qom-type=]type,id=str[,prop=value][,...] -- create QOM object
+object_del id -- destroy QOM object
+pcie_aer_inject_error [-a] [-c] id <error_status> [<tlp header> [<tlp header prefix>]] -- inject pcie aer error
+			 -a for advisory non fatal error
+			 -c for correctable error
+			<id> = qdev device id
+			<error_status> = error string or 32bit
+			<tlb header> = 32bit x 4
+			<tlb header prefix> = 32bit x 4
+pmemsave addr size file -- save to disk physical memory dump starting at 'addr' of size 'size'
+p|print /fmt expr -- print expression value (use $reg for CPU register access)
+qemu-io [device] "[command]" -- run a qemu-io command on a block device
+qom-list path -- list QOM properties
+qom-set path property value -- set QOM property
+q|quit  -- quit the emulator
+ringbuf_read device size -- Read from a ring buffer character device
+ringbuf_write device data -- Write to a ring buffer character device
+savevm [tag|id] -- save a VM snapshot. If no tag or id are provided, a new snapshot is created
+screendump filename [device [head]] -- save screen from head 'head' of display device 'device' into PPM image 'filename'
+sendkey keys [hold_ms] -- send keys to the VM (e.g. 'sendkey ctrl-alt-f1', default hold time=100 ms)
+set_link name on|off -- change the link status of a network adapter
+set_password protocol password action-if-connected -- set spice/vnc password
+singlestep [on|off] -- run emulation in singlestep mode or switch to normal mode
+snapshot_blkdev [-n] device [new-image-file] [format] -- initiates a live snapshot
+			of device. If a new image file is specified, the
+			new image file will become the new root image.
+			If format is specified, the snapshot file will
+			be created in that format.
+			The default format is qcow2.  The -n flag requests QEMU
+			to reuse the image found in new-image-file, instead of
+			recreating it from scratch.
+snapshot_blkdev_internal device name -- take an internal snapshot of device.
+			The format of the image used by device must
+			support it, such as qcow2.
+			
+snapshot_delete_blkdev_internal device name [id] -- delete an internal snapshot of device.
+			If id is specified, qemu will try delete
+			the snapshot matching both id and name.
+			The format of the image used by device must
+			support it, such as qcow2.
+			
+stop  -- stop emulation
+stopcapture capture index -- stop capture
+sum addr size -- compute the checksum of a memory region
+sync-profile [on|off|reset] -- enable, disable or reset synchronization profiling. With no arguments, prints whether profiling is on or off.
+system_powerdown  -- send system power down event
+system_reset  -- reset the system
+system_wakeup  -- wakeup guest from suspend
+trace-event name on|off [vcpu] -- changes status of a specific trace event (vcpu: vCPU to set, default is all)
+watchdog_action [reset|shutdown|poweroff|pause|debug|none] -- change watchdog action
+wavcapture path [frequency [bits [channels]]] -- capture audio to a wave file (default frequency=44100 bits=16 channels=2)
+x /fmt addr -- virtual memory dump starting at 'addr'
+x_colo_lost_heartbeat  -- Tell COLO that heartbeat is lost,
+			a failover or takeover is needed.
+xp /fmt addr -- physical memory dump starting at 'addr'
+(qemu) s[K[Dst[K[D[Dsto[K[D[D[Dstop[K
+(qemu) e[K[Dex[K[D[Dexi[K[D[D[Dexit[K
+unknown command: 'exit'
+(qemu) q[K[Dqu[K[D[Dqui[K[D[D[Dquic[K[D[D[D[Dqui[K[D[D[Dquit[K
+]0;006915071@csusb.edu@jb359-12:~/xv6[006915071@csusb.edu@jb359-12 xv6]$ quit
+bash: quit: command not found...
+Similar command is: 'quot'
+]0;006915071@csusb.edu@jb359-12:~/xv6[006915071@csusb.edu@jb359-12 xv6]$ exit
+exit
+
+Script done on 2020-10-16 13:27:23-07:00 [COMMAND_EXIT_CODE="127"]
